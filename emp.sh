@@ -21,6 +21,7 @@ function pipe_to_emacs {
     file=`mktemp`
     input_to_file $file
     emacsclient -n --eval "(pipe \"$file\" \"$buffer\")" > /dev/null
+    rm file
 }
 
 if [ $# -gt 1 ]; then
