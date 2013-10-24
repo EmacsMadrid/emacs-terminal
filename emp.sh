@@ -3,7 +3,7 @@
 # -*- Shell -*-
 
 NAME=`basename $0`
-BUFFER="*Pipe*"
+BUFFER="*stdin*"
 function show_usage {
     echo "usage: <command that produces output> | $NAME [buffer-name]"
     exit 1
