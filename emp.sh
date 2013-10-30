@@ -3,7 +3,7 @@
 # -*- Shell -*-
 
 NAME=`basename $0`
-BUFFER="*Pipe*"
+BUFFER="*stdin*"
 function show_usage {
     echo "usage: <command that produces output> | $NAME [buffer-name]"
     exit 1
@@ -21,6 +21,7 @@ function pipe_to_emacs {
     file=`mktemp`
     input_to_file $file
     emacsclient -n --eval "(pipe \"$file\" \"$buffer\")" > /dev/null
+    rm file
 }
 
 if [ $# -gt 1 ]; then
