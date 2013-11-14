@@ -1,4 +1,4 @@
-#!/bin sh
+#!/bin/sh
 # -*- coding: utf-8 -*-
 # -*- Shell -*-
 
