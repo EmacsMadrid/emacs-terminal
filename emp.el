@@ -1,8 +1,14 @@
 (defun pipe (filename buffer-name)
-  "Open FILENAME and append its content to buffer BUFFER-NAME.
+  "Open FILENAME and insert its content to buffer BUFFER-NAME.
 
-If a buffer with that name does not exist, it's created."
+If the buffer BUFFER-NAME does not exist, it's created.
+If narrowing is taking place in buffer BUFFER-NAME only the narrowed region is
+replaced by the piped content."
   (find-file filename)
-  (append-to-buffer (get-buffer-create buffer-name) (point-min) (point-max))
-  (kill-buffer)
-  (switch-to-buffer buffer-name))
+  (let ((stdin (get-buffer-create buffer-name))
+        (tmp (current-buffer)))
+    (switch-to-buffer stdin)
+    (delete-region (point-min) (point-max))
+    (switch-to-buffer tmp)
+    (append-to-buffer stdin (point-min) (point-max))
+    (kill-buffer)))
